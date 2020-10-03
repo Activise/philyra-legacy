@@ -1,0 +1,19 @@
+external {
+  Money: io.activise.order.Money;
+}
+
+globalbase BaseEntity {
+  creationDate: DateTime;
+  modifiedDate: DateTime;
+}
+
+entity Order(orders) {
+  id: String {pk};
+  customerReference: String {idx};
+  orderEntries:+ OrderEntry[];
+}
+
+entity OrderEntry(order_entries) {
+  order:+ Order;
+  money:- Money;
+}
