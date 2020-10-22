@@ -1,5 +1,0 @@
-entity Order(orders) {
-  id: String {pk};
-  customerReference: String {idx, unique};
-  orderEntries:+ OrderEntry[];
-}

@@ -39,4 +39,4 @@ release.properties
 .antlr/
 
 # Java
-src/main/generated-sources/
+generated-sources/

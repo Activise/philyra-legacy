@@ -1,0 +1,10 @@
+entity Order(orders) {
+  id: String {idx, pk};
+  customerReference: String {idx, unique};
+  orderEntries:+ OrderEntry[];
+}
+
+entity OrderEntry(order_entries) {
+  order:+ Order;
+  money:- Money;
+}
