@@ -1,4 +1,4 @@
-package io.activise.entitydsl.api.lang;
+package io.activise.philyra.api.lang;
 
 public enum AssociationType {
   NORMAL, BI, EMBEDDED;

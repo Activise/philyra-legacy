@@ -1,4 +1,4 @@
-package io.activise.entitydsl.api.lang;
+package io.activise.philyra.api.lang;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package io.activise.entitydsl.javapoet;
+package io.activise.philyra.javapoet;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,12 +20,12 @@ import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 
-import io.activise.entitydsl.api.lang.ArrayType;
-import io.activise.entitydsl.api.lang.CompilationUnit;
-import io.activise.entitydsl.api.lang.Entity;
-import io.activise.entitydsl.api.lang.Type;
-import io.activise.entitydsl.api.transpiler.EntityDslTranspiler;
-import io.activise.entitydsl.api.transpiler.TranspilationResult;
+import io.activise.philyra.api.lang.ArrayType;
+import io.activise.philyra.api.lang.CompilationUnit;
+import io.activise.philyra.api.lang.Entity;
+import io.activise.philyra.api.lang.Type;
+import io.activise.philyra.api.transpiler.EntityDslTranspiler;
+import io.activise.philyra.api.transpiler.TranspilationResult;
 
 public class JavapoetTranspiler implements EntityDslTranspiler {
   private EntityIndex entityIndex = new EntityIndex();

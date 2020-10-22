@@ -1,4 +1,4 @@
-package io.activise.entitydsl.util;
+package io.activise.philyra.util;
 
 import java.util.Optional;
 import java.util.function.Supplier;

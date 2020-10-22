@@ -1,4 +1,4 @@
-package io.activise.entitydsl.javapoet;
+package io.activise.philyra.javapoet;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,8 +8,8 @@ import javax.persistence.Index;
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.FieldSpec;
 
-import io.activise.entitydsl.api.lang.Attribute;
-import io.activise.entitydsl.api.lang.Entity;
+import io.activise.philyra.api.lang.Attribute;
+import io.activise.philyra.api.lang.Entity;
 
 public class AttributeOptionProcessor implements AttributeProcessor<FieldSpec.Builder> {
   @Override

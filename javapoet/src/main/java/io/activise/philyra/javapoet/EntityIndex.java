@@ -1,4 +1,4 @@
-package io.activise.entitydsl.javapoet;
+package io.activise.philyra.javapoet;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,7 +12,7 @@ import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 
-import io.activise.entitydsl.api.lang.Entity;
+import io.activise.philyra.api.lang.Entity;
 
 public class EntityIndex {
 	private Map<String, TypeName> predefinedTypeMap = new HashMap<>();

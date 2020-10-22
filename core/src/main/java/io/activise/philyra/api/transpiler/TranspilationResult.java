@@ -1,4 +1,4 @@
-package io.activise.entitydsl.api.transpiler;
+package io.activise.philyra.api.transpiler;
 
 public class TranspilationResult {
   private String id;

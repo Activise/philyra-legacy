@@ -1,13 +1,4 @@
-package io.activise.entitydsl;
-
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-import org.junit.jupiter.api.Test;
-
-import io.activise.entitydsl.api.transpiler.TranspilationResult;
-import io.activise.entitydsl.javapoet.JavapoetTranspiler;
+package io.activise.philyra;
 
 public class TranspilerIntegrationTest {
   // @Test

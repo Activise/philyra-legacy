@@ -1,13 +1,13 @@
-package io.activise.entitydsl.javapoet;
+package io.activise.philyra.javapoet;
 
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.FieldSpec.Builder;
 
-import io.activise.entitydsl.api.lang.ArrayType;
-import io.activise.entitydsl.api.lang.AssociationType;
-import io.activise.entitydsl.api.lang.Attribute;
-import io.activise.entitydsl.api.lang.Entity;
+import io.activise.philyra.api.lang.ArrayType;
+import io.activise.philyra.api.lang.AssociationType;
+import io.activise.philyra.api.lang.Attribute;
+import io.activise.philyra.api.lang.Entity;
 
 public class AssociationProcessor implements AttributeProcessor<FieldSpec.Builder> {
   @Override
@@ -15,7 +15,7 @@ public class AssociationProcessor implements AttributeProcessor<FieldSpec.Builde
     if (AssociationType.BI == attribute.getAssociationType()) {
       AnnotationSpec.Builder annotationSpec = null;
       if (isArrayAttribute(attribute)) {
-        
+
 
 
       } else {
