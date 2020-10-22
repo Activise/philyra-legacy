@@ -1,0 +1,4 @@
+**/vscode/
+**/xtext-gen/
+**/model/generated/*
+**/xtend-gen/

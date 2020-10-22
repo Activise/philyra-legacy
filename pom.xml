@@ -17,6 +17,7 @@
 
   <modules>
     <module>core</module>
+    <module>xtext</module>
     <module>javapoet</module>
     <module>maven-plugin</module>
     <module>example</module>

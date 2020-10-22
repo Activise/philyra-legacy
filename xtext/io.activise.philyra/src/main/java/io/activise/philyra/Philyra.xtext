@@ -1,0 +1,39 @@
+grammar io.activise.philyra.Philyra with org.eclipse.xtext.common.Terminals
+
+generate philyra "http://www.activise.io/philyra/Philyra"
+
+ECompilationUnit: ESingleUnit;
+fragment ESingleUnit:
+  (packages+=EPackageDeclaration | imports+=EImport | includes+=EInclude | types+=EType | entities+=EEntity | dtos+=EDto)*
+;
+EPackageDeclaration:
+  'package' name=EQualifiedName '{'
+    ESingleUnit
+  '}'
+;
+
+EQualifiedName: ID ('.' ID)*;
+EQualifiedNameWithWildcard: EQualifiedName '.*'?;
+EImport: 'import' importedNamespace=EQualifiedNameWithWildcard;
+EInclude: 'include' importURI=STRING;
+
+EAbstractType: EEntity | EType;
+EEntity:
+  'entity' name=ID ('(' tableName=ID ')')? '{'
+    attributes+=EAttribute*
+  '}'
+;
+EType: primitive?='primitive'? 'type' name=ID 'to' target=STRING;
+EAttribute: modifiers=EModifiers name=ID ':' type=[EAbstractType|EQualifiedName] relationType=ERelationType? ('from' opposite=[EAttribute])? ';';
+EModifiers: {EModifiers} (id?='id'? & unique?='unique'? & index?='index'? & pk?='pk'?);
+enum ERelationType: UNSPECIFIED | ONE_TO_MANY='[0..n]' | MANY_TO_MANY='[n..m]';
+
+EDto:
+  'dto' (name=ID | (name=ID? 'for' entity=[EEntity|EQualifiedName])) '{'
+    excludes+=EDtoExlude*
+  '}'
+;
+
+EDtoExlude:
+  'exclude' field=[EAttribute] ';'
+;
