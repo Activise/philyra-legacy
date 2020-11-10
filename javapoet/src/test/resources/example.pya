@@ -1,0 +1,9 @@
+include "types.pya"
+import io.example.*
+
+package io.example {
+  entity Example(examples) {
+    index exampleAttribute: String;
+    index exampleAttribute2: String;
+  }
+}
