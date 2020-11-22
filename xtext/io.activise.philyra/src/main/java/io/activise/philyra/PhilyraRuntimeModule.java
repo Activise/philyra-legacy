@@ -3,20 +3,22 @@
  */
 package io.activise.philyra;
 
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
-import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
+import io.activise.philyra.scoping.PhilyraGlobalScopeProvider;
+import io.activise.philyra.scoping.PhilyraResourceDescriptionStrategy;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class PhilyraRuntimeModule extends AbstractPhilyraRuntimeModule {
-//  public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
-//    return PhilyraResourceDescriptionStrategy.class;
-//  }
+  public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+    return PhilyraResourceDescriptionStrategy.class;
+  }
 
   @Override
   public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
-    return ImportUriGlobalScopeProvider.class;
+    return PhilyraGlobalScopeProvider.class;
   }
 
 }

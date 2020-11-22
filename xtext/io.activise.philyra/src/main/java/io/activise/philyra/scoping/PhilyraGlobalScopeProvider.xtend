@@ -24,29 +24,26 @@ class PhilyraGlobalScopeProvider extends ImportUriGlobalScopeProvider {
   override protected getImportedUris(Resource resource) {
     return cache.get(PhilyraGlobalScopeProvider.getSimpleName(), resource, new Provider<LinkedHashSet<URI>>() {
       override get() {
-        val uniqueImportURIs = collectImportUris(resource, new LinkedHashSet<URI>(5))
-        uniqueImportURIs.removeIf[!EcoreUtil2.isValidUri(resource, it)];
-        return uniqueImportURIs
+        val importUris = collectImportUris(resource, new LinkedHashSet<URI>(5))
+        importUris.removeIf[!EcoreUtil2.isValidUri(resource, it)]
+        return importUris
       }
 
-      def LinkedHashSet<URI> collectImportUris(Resource resource, LinkedHashSet<URI> uniqueImportURIs) {
+      def LinkedHashSet<URI> collectImportUris(Resource resource, LinkedHashSet<URI> importUris) {
         val resourceDescription = descriptionManager.getResourceDescription(resource)
         val compilationUnits = resourceDescription.getExportedObjectsByType(PhilyraPackage.Literals.ECOMPILATION_UNIT)
-
-        compilationUnits.forEach [
-          val userData = getUserData(PhilyraResourceDescriptionStrategy.IMPORTS)
-          if (!userData.isNullOrEmpty) {
-            SPLITTER.split(userData).forEach [ uri |
-              var includedUri = URI.createURI(uri)
-              includedUri = includedUri.resolve(resource.URI)
-              if (uniqueImportURIs.add(includedUri)) {
-                collectImportUris(resource.getResourceSet().getResource(includedUri, true), uniqueImportURIs)
-              }
-            ]
-          }
-        ]
-
-        return uniqueImportURIs
+        
+        compilationUnits
+          .map[getUserData(PhilyraResourceDescriptionStrategy.INCLUDES)]
+          .filter[!isNullOrEmpty].forEach[
+            SPLITTER.split(it)
+              .map[URI.createURI(it).resolve(resource.URI)]
+              .filter[importUris.add(it)]
+              .map[resource.getResourceSet().getResource(it, true)]
+              .forEach[collectImportUris(it, importUris)]
+          ]
+   
+        return importUris
       }
     });
   }
