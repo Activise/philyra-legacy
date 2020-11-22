@@ -20,11 +20,5 @@ class PhilyraGenerator extends AbstractGenerator {
     if (order !== null) {
       order.attributes.forEach[println(it.type.eResource)]
     }
-
-  // fsa.generateFile('greetings.txt', 'People to greet: ' +
-  // resource.allContents
-  // .filter(Greeting)
-  // .map[name]
-  // .join(', '))
   }
 }

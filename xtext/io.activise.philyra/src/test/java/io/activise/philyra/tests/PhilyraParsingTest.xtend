@@ -16,6 +16,7 @@ import org.junit.jupiter.api.^extension.ExtendWith
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.junit.Assert.*
+import org.eclipse.xtext.EcoreUtil2
 
 @ExtendWith(InjectionExtension)
 @InjectWith(PhilyraInjectorProvider)

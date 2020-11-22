@@ -3,7 +3,13 @@ import io.example.*
 
 package io.example {
   entity Example(examples) {
-    index exampleAttribute: String;
-    index exampleAttribute2: String;
+    id theId: String;
+    index sampleIndex: String;
+    childs: ExampleChild[0..n] from parent;
+  }
+  
+  entity ExampleChild(example_childs) {
+    id theId: String;
+    parent: Example;
   }
 }

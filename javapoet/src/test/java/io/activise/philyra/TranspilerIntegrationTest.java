@@ -1,17 +1,22 @@
 package io.activise.philyra;
 
-public class TranspilerIntegrationTest {
-  // @Test
-  // public void example() throws Exception {
-  //   String source = getSource("example.txt");
-  //   var compiler =  new AntlrCompiler();
-  //   var compilationUnit = compiler.parse(source);
-  //   var transpiler = new JavapoetTranspiler();
-  //   transpiler.transpile(compilationUnit).stream().map(TranspilationResult::getSource).forEach(System.out::println);
-  // }
+import java.nio.file.Path;
+import org.junit.jupiter.api.Test;
+import io.activise.philyra.generator.ExampleCompiler;
+import io.activise.philyra.javapoet.JavapoetTranspiler;
 
-  // private String getSource(String path) throws Exception {
-  //   return Files.readString(Path.of(getClass().getClassLoader().getResource(path).toURI()), StandardCharsets.UTF_8);
-  // }
+public class TranspilerIntegrationTest {
+  @Test
+  public void example() throws Exception {
+    Path source = getSource("example.pya");
+    var exampleCompiler = ExampleCompiler.create();
+    var result = exampleCompiler.runGenerator(source);
+    var transpiler = new JavapoetTranspiler();
+    transpiler.transpile(result);
+  }
+
+  private Path getSource(String path) throws Exception {
+    return Path.of(getClass().getClassLoader().getResource(path).toURI());
+  }
 
 }

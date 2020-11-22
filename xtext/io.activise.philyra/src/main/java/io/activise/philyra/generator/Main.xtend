@@ -35,18 +35,15 @@ class Main {
   @Inject JavaIoFileSystemAccess fileAccess
 
   def protected runGenerator(String string) {
-    // Load the resource
     val set = resourceSetProvider.get
     val resource = set.getResource(URI.createFileURI(string), true)
 
-    // Validate the resource
     val issues = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl)
     if (!issues.empty) {
       issues.forEach[System.err.println(it)]
       return
     }
 
-    // Configure and start the generator
     fileAccess.outputPath = 'src-gen/'
     val context = new GeneratorContext => [
       cancelIndicator = CancelIndicator.NullImpl
