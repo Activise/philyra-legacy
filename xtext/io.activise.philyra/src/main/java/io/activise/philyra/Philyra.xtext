@@ -13,18 +13,20 @@ EPackageDeclaration:
 ;
 
 EQualifiedName: ID ('.' ID)*;
+
 EQualifiedNameWithWildcard: EQualifiedName '.*'?;
 EImport: 'import' importedNamespace=EQualifiedNameWithWildcard;
 EInclude: 'include' importURI=STRING;
 
-EAbstractType: EEntity | EType;
+EAbstractType: (EEntity | EType);
+
 EEntity:
-  'entity' name=ID ('(' tableName=ID ')')? '{'
+  'entity' name=ID ('(' tableName=ID ')')? ('is' superEntity=[EEntity|EQualifiedName])? '{'
     attributes+=EAttribute*
   '}'
 ;
 EType: primitive?='primitive'? 'type' name=ID 'to' target=STRING;
-EAttribute: modifiers=EModifiers name=ID ':' type=[EAbstractType|EQualifiedName] relationType=ERelationType? ('from' opposite=[EAttribute])? ';';
+EAttribute: modifiers=EModifiers name=(ID|'id') ':' type=[EAbstractType|EQualifiedName] array?='[]'? relationType=ERelationType? ('from' opposite=[EAttribute])? ';';
 EModifiers: {EModifiers} (id?='id'? & unique?='unique'? & index?='index'? & pk?='pk'?);
 enum ERelationType: UNSPECIFIED | ONE_TO_MANY='[0..n]' | MANY_TO_MANY='[n..m]';
 
