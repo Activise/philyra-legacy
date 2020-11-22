@@ -31,7 +31,7 @@ class PhilyraValidator extends AbstractPhilyraValidator {
   def checkUniqueEntityName(EAbstractType abstractType) {
     val compilationUnit = abstractType.getContainerOfType(ECompilationUnit)
     val currentPackage = abstractType.getContainerOfType(EPackageDeclaration)
-    var abstractTypes = currentPackage !== null ? currentPackage.getAllContentsOfType(EAbstractType) : compilationUnit.getAllContentsOfType(EAbstractType);
+    val abstractTypes = currentPackage !== null ? currentPackage.getAllContentsOfType(EAbstractType) : compilationUnit.getAllContentsOfType(EAbstractType);
 
     if (abstractTypes.exists[it != abstractType && name.equals(abstractType.name)]) {
       error('''The entity/type '«abstractType.name»' is already declared!''', abstractType, PhilyraPackage.Literals.EABSTRACT_TYPE__NAME);
@@ -44,6 +44,20 @@ class PhilyraValidator extends AbstractPhilyraValidator {
     if (isId && (isUnique || isIndex || isPk)) {
       warning("The modifier 'id' is equivalent to 'unique index pk'", attribute, PhilyraPackage.Literals.EATTRIBUTE__MODIFIERS);
     }
+  }
+
+  @Check
+  def checkTooManyPkAttributes(EAttribute attribute) {
+    val it = attribute.getContainerOfType(EEntity)
+    val hasPkAttribute = attributes.exists[it != attribute && isPkAttribute(it)]
+    if (hasPkAttribute && isPkAttribute(attribute)) {
+      error(attribute.name + " There are multiple attributes with an 'id' or 'pk' modifier", attribute, PhilyraPackage.Literals.EATTRIBUTE__MODIFIERS)
+    }
+  }
+  
+  def boolean isPkAttribute(EAttribute attribute) {
+    val it = attribute.modifiers;
+    return isId || isPk;
   }
 
 }
